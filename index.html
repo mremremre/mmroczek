@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marcel Mroczek</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f5f5f0;
+      color: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 48px 16px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 16px;
+      max-width: 680px;
+      width: 100%;
+      padding: 48px 48px 40px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    }
+
+    /* --- Header --- */
+    .header {
+      display: flex;
+      align-items: flex-start;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+
+    .photo-wrap {
+      flex-shrink: 0;
+    }
+
+    .photo {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #e8e8e3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+      font-size: 36px;
+      /* Replace src attribute on <img> below to add a real photo */
+    }
+
+    .header-text { flex: 1; }
+
+    .name {
+      font-size: 1.75rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+
+    .title {
+      font-size: 0.95rem;
+      color: #555;
+      font-weight: 400;
+      margin-top: 4px;
+    }
+
+    .location {
+      font-size: 0.85rem;
+      color: #888;
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* --- Links --- */
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      text-decoration: none;
+      border: 1.5px solid #e0e0da;
+      color: #333;
+      background: #fafaf8;
+      transition: border-color 0.15s, background 0.15s, color 0.15s;
+    }
+    .link-btn:hover { border-color: #aaa; background: #f0f0ea; color: #000; }
+    .link-btn i { font-size: 0.85em; }
+
+    /* --- Divider --- */
+    hr {
+      border: none;
+      border-top: 1px solid #ebebeb;
+      margin: 28px 0;
+    }
+
+    /* --- Section --- */
+    section { margin-bottom: 28px; }
+    section:last-child { margin-bottom: 0; }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: #333;
+    }
+
+    /* --- Tag list --- */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      font-size: 0.82rem;
+      padding: 4px 12px;
+      background: #f0f0ea;
+      border-radius: 999px;
+      color: #444;
+    }
+
+    /* --- Timeline --- */
+    .timeline { display: flex; flex-direction: column; gap: 10px; }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 12px;
+      font-size: 0.88rem;
+    }
+
+    .timeline-period {
+      color: #999;
+      font-size: 0.8rem;
+      padding-top: 1px;
+    }
+
+    .timeline-body { color: #333; line-height: 1.5; }
+    .timeline-body strong { font-weight: 500; color: #111; }
+    .timeline-body span { color: #777; }
+
+    /* --- Publications --- */
+    .pub-list { display: flex; flex-direction: column; gap: 12px; }
+
+    .pub {
+      font-size: 0.88rem;
+      line-height: 1.55;
+      color: #333;
+    }
+
+    .pub a {
+      color: #4a7fa5;
+      text-decoration: none;
+    }
+    .pub a:hover { text-decoration: underline; }
+
+    .pub-authors { color: #888; font-size: 0.82rem; }
+
+    /* --- Responsive --- */
+    @media (max-width: 540px) {
+      .card { padding: 32px 24px; }
+      .header { flex-direction: column; align-items: center; text-align: center; }
+      .location { justify-content: center; }
+      .links { justify-content: center; }
+      .timeline-item { grid-template-columns: 1fr; gap: 2px; }
+      .timeline-period { font-size: 0.75rem; color: #bbb; }
+    }
+  </style>
+</head>
+<body>
+<div class="card">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="photo-wrap">
+      <!--
+        To add a photo: replace the <div> below with:
+        <img class="photo" src="photo.jpg" alt="Marcel Mroczek">
+      -->
+      <div class="photo">
+        <i class="fa-regular fa-user"></i>
+      </div>
+    </div>
+    <div class="header-text">
+      <div class="name">Marcel Mroczek</div>
+      <div class="title">AI Safety Researcher &middot; Mathematician</div>
+      <div class="location">
+        <i class="fa-solid fa-location-dot" style="font-size:0.75em"></i>
+        Kraków, Poland
+      </div>
+
+      <!-- Social / contact links -->
+      <div class="links">
+        <a class="link-btn" href="mailto:mroczek.marcel@gmail.com">
+          <i class="fa-regular fa-envelope"></i> Email
+        </a>
+        <a class="link-btn" href="https://github.com/mmroczek" target="_blank" rel="noopener">
+          <i class="fa-brands fa-github"></i> GitHub
+        </a>
+        <!-- Add your LinkedIn URL below -->
+        <a class="link-btn" href="#" target="_blank" rel="noopener">
+          <i class="fa-brands fa-linkedin"></i> LinkedIn
+        </a>
+        <!-- Add your Twitter/X handle below -->
+        <a class="link-btn" href="#" target="_blank" rel="noopener">
+          <i class="fa-brands fa-x-twitter"></i> Twitter
+        </a>
+        <a class="link-btn" href="https://www.lesswrong.com/users/mroczek-marcel" target="_blank" rel="noopener">
+          <i class="fa-regular fa-newspaper"></i> LessWrong
+        </a>
+        <a class="link-btn" href="https://arxiv.org/search/?query=Mroczek&searchtype=author" target="_blank" rel="noopener">
+          <i class="fa-solid fa-file-lines"></i> arXiv
+        </a>
+        <!-- Add CV link below if you host it somewhere -->
+        <!-- <a class="link-btn" href="cv.pdf" target="_blank" rel="noopener">
+          <i class="fa-regular fa-file-pdf"></i> CV
+        </a> -->
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- About -->
+  <section>
+    <div class="section-label">About</div>
+    <p>
+      I'm an independent AI Safety researcher from Poland with a background in theoretical
+      mathematics. Currently in the <a href="https://www.matsprogram.org/" target="_blank" rel="noopener" style="color:#4a7fa5;text-decoration:none;">MATS program</a>
+      under Richard Ngo's stream, following a Dovetail Research Fellowship where I worked on
+      <a href="https://www.lesswrong.com/posts/usq5PGwA5cBKEfZyC/improving-internal-model-principle" target="_blank" rel="noopener" style="color:#4a7fa5;text-decoration:none;">Internal Model Principle</a>.
+      Before pivoting to AI Safety, I spent several years as a Data Scientist and AI Engineer
+      at Samsung R&amp;D Poland.
+    </p>
+    <p style="margin-top:10px">
+      I hold an MSc in Pure Mathematics from the Jagiellonian University in Kraków, where I'm
+      also pursuing a PhD in mathematics, with research on ergodic theory and dynamical systems
+      for amenable group actions.
+    </p>
+  </section>
+
+  <hr>
+
+  <!-- Research interests -->
+  <section>
+    <div class="section-label">Research Interests</div>
+    <div class="tags">
+      <span class="tag">AI Safety</span>
+      <span class="tag">World Modeling</span>
+      <span class="tag">Agent Foundations</span>
+      <span class="tag">Ergodic Theory</span>
+      <span class="tag">Dynamical Systems</span>
+      <span class="tag">Game Theory</span>
+      <span class="tag">LLMs</span>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- Experience -->
+  <section>
+    <div class="section-label">Experience</div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-period">2026 &ndash; now</div>
+        <div class="timeline-body">
+          <strong>MATS Program</strong> &mdash; <span>Research under Richard Ngo's stream</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-period">2025 &ndash; 2026</div>
+        <div class="timeline-body">
+          <strong>Research Fellow</strong> &mdash; <span>Dovetail. Mathematical AI safety, world modeling in agents.</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-period">2022 &ndash; 2026</div>
+        <div class="timeline-body">
+          <strong>Data Scientist / AI Engineer</strong> &mdash; <span>Samsung R&amp;D Poland. Language analytics, LLMs, outlier detection.</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-period">2019 &ndash;</div>
+        <div class="timeline-body">
+          <strong>PhD Candidate</strong> &mdash; <span>Jagiellonian University, Mathematics. Besicovitch &amp; Ornstein metrics for amenable group actions.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- Publications -->
+  <section>
+    <div class="section-label">Selected Publications</div>
+    <div class="pub-list">
+      <div class="pub">
+        <div>Ergodic Points are Closed with Respect to the Besicovitch Pseudometric for Amenable Group Actions</div>
+        <div class="pub-authors">M. Łącka and M. Mroczek &mdash; <em>Journal of Difference Equations and Applications</em>, 2025</div>
+      </div>
+      <div class="pub">
+        <div>
+          Generic points in a characteristic class for amenable group actions are closed in the Besicovitch pseudometric
+          &nbsp;<a href="https://arxiv.org/abs/2510.26572" target="_blank" rel="noopener">arXiv:2510.26572</a>
+        </div>
+        <div class="pub-authors">S. Babel, M. Łącka and M. Mroczek &mdash; <em>Preprint</em>, 2025</div>
+      </div>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- Personal -->
+  <section>
+    <div class="section-label">Outside Work</div>
+    <div class="tags">
+      <span class="tag">Go (5 kyu)</span>
+      <span class="tag">Alchemists</span>
+      <span class="tag">Dominion</span>
+      <span class="tag">Mountain Hiking</span>
+      <span class="tag">Badminton</span>
+      <span class="tag">Sci-Fi &amp; Fantasy</span>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
